@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+
+{% block head_title %}
+This is amazing
+{% endblock head_title %}
+{% block content %}
+Welcome to Tweetme
+
+
+<div id='tweets'>
+    Replace Me
+</div>
+
+
+<script>
+const tweetsElemnt = document.getElementById('tweets') // get an html element
+tweetsElemnt.innerHTML = 'Loading...' // set new html in that element 
+// var el1 = "<h1>Hi There 1</h1>"
+// var el2 = "<h1>Hi There 2</h1>"
+// var el3 = "<h1>Hi There 3</h1>"
+// tweetsElemnt.innerHTML = el1 + el2 + el3
+
+const xhr = new XMLHttpRequest() // Python equivalent xhr = SomeClass()
+const method = 'GET' // 'POSTS'
+const url = '/tweets'
+const responseType = 'json'
+
+function LikeBtn() {
+    return "<button class ='btn btn-primary'>Like</button>"
+}
+
+function formatTweetElement(tweet){
+
+    var formatTweet = "<div class='mb-4 tweet' id ='tweet-" + tweet.id
+    + "'><p>" + tweet.content + 
+        "</p><div class ='btn-group'>" + LikeBtn() +
+        "</div></div>"
+    return formatTweet
+}
+xhr.responseType = responseType
+xhr.open(method,url) // Open up the request with this method and url
+xhr.onload = function() {
+    const serverResponse = xhr.response // load the response 
+    const ListedItems = serverResponse.response
+    var finalTweetStr = ""
+    var i;
+    for (i=0;i<ListedItems.length; i++) {
+        var tweetobj = ListedItems[i]
+        var currentItem = formatTweetElement(tweetobj)
+        finalTweetStr += currentItem
+    }
+    tweetsElemnt.innerHTML = finalTweetStr
+}
+xhr.send() // trigger the requests
+
+
+
+</script>
+{% endblock content %}
