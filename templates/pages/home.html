@@ -18,7 +18,7 @@ this is amazing!!!!
         <form class='form' id = 'tweet-create-form' method='POST' action='/create-tweet'>
             {% csrf_token %}
             <input type='hidden' value='/' name='next' />  <!-- references next url in views.py -->
-            <textarea class='form-control' name='content' placeholder='Your tweet...'></textarea>
+            <textarea required='required' class='form-control' name='content' placeholder='Your tweet...'></textarea>
             <button type='submit' class='btn btn-primary'>Tweet</button>
         </form>
     </div>
@@ -50,7 +50,9 @@ function handleTweetCreateFromDidSumbit(event) {
         // const tweetsEl = document.getElementById("tweets") //this reloads all tweets
         // loadTweets(tweetsEl) 
         const newTweetElemnt = formatTweetElement(newTweetJson)
-        console.log(newTweetElemnt)
+        const ogHtml = tweetsContainerElemnet.innerHTML
+        tweetsContainerElemnet.innerHTML = newTweetElemnt + ogHtml
+        myForm.reset() // clears tweet
         }
     }
     xhr.send(myFormData)
