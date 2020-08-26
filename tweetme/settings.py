@@ -27,6 +27,10 @@ SECRET_KEY = '$35e3po+uxbqz1pn8)r=45z#&#&7@=6&z_d)vlbill%i3amfp%'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
+# DEBUG can be True/False or 1/0
+# DEBUG = int(os.environ('DEBUG', default=1))
+
+
 ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
 LOGIN_URL = "/login"
 MAX_TWEET_LENGTH = 240
