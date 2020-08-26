@@ -84,8 +84,10 @@ function handleTweetCreateFromDidSumbit(event) {
             }
         } else if (xhr.status === 401) {
             alert('You must be logged in to send a Tweet')
+        } else if (xhr.status === 403) {
+            alert('You must be logged in to send a Tweet')
         }
-         else if (xhr.status === 500) {
+        else if (xhr.status === 500) {
             alert('There was a server error please try again')
         }
     }
@@ -109,7 +111,7 @@ function loadTweets(tweetsElement) {
     xhr.open(method, url)
     xhr.onload = function() {
         const serverResponse = xhr.response
-        const listedItems = serverResponse.response // array
+        const listedItems = serverResponse // array
         var finalTweetStr = ""
         var i;
         for (i=0;i<listedItems.length; i++) {
